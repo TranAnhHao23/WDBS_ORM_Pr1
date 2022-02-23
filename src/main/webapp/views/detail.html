@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>
+        View Product
+    </title>
+    <style th:replace="/layout :: css"></style>
+</head>
+<body>
+<div th:unless="${customer == null}">
+    <table id="customers">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${customer.getName()}"></td>
+            <td th:text="${customer.getAddress()}"></td>
+            <td th:text="${customer.getEmail()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <a th:href="@{/home}">BACK TO HOME</a>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

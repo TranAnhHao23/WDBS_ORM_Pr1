@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>
+        List Customer
+    </title>
+    <style th:replace="/layout :: css"></style>
+</head>
+<body>
+<h1>Customers</h1>
+<h2 th:class="notify" th:if="${message} != null">
+    <span th:text="${message}"></span>
+</h2>
+<div>
+    <a th:href="@{/home/create}">CREATE NEW CUSTOMER</a>
+</div>
+<div>
+    <form th:action="@{/home/search}" method="post">
+        <label for="searchName"><input type="text" name="searchName" id="searchName" placeholder="Search..." style="size: 20px">
+<!--            <button type="submit">Search</button>-->
+        </label>
+    </form>
+</div>
+<div th:unless="${customers.isEmpty()}">
+    <table id="customers">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th colspan="3">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.getName()}"></td>
+            <td th:text="${customer.getAddress()}"></td>
+            <td th:text="${customer.getEmail()}"></td>
+            <td><a th:href="@{/home/delete/{id}(id=${customer.getId()})}"
+                   onclick="return confirm('Delete this customer?')">DELETE</a></td>
+            <td><a th:href="@{/home/edit/{id}(id=${customer.getId()})}">EDIT</a></td>
+            <td><a th:href="@{/home/view(id=${customer.getId()})}">VIEW</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

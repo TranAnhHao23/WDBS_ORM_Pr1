@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>
+        Product
+    </title>
+    <style th:replace="/layout :: css"></style>
+</head>
+<body>
+<h2 th:class="notify" th:if="${message} != null">
+    <span th:text="${message}"></span>
+</h2>
+<form id="form" th:action="@{/home/{id}(id=${customer.getId()})}" th:object="${customer}" method="post">
+    <label>Name:
+        <input type="text" name="name" th:field="*{name}">
+    </label>
+    <label>Address:
+        <input type="text" name="address" th:field="*{address}">
+    </label>
+    <label>Email:
+        <input type="text" name="email" th:field="*{email}">
+    </label>
+    <br>
+    <button type="submit">Submit</button>
+</form>
+<p><a th:href="@{/home}">Back to list</a></p>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
